@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include('inc/header.php');
 include 'Invoice.php';
 
@@ -10,7 +11,7 @@ $sql = "SELECT * FROM vehicles";
 $all_categories = mysqli_query($mysqli, $sql);
 
 //Get all the items from items table
-$sql2 = "SELECT * FROM itens";
+$sql2 = "SELECT name, price FROM itens";
 $all_itens = mysqli_query($mysqli, $sql2);
 
 //Get all the items from items table
@@ -24,31 +25,6 @@ if (!empty($_POST['companyName']) && $_POST['companyName']) {
 	header("Location:invoice_list.php");
 }
 
-// Get the product id 
- $product_id = "";
-print_r($product_id);
-
-
-      
-//     // Get corresponding name and price for that product id    
-    $query = mysqli_query($mysqli, "SELECT name, price FROM itens WHERE product_id='$product_id'");
-  
-    $row = mysqli_fetch_array($query);
-  
-     // Get the first name
-   isset($row['name']);
-  
-     // Get the first name
-    $price = $row["price"];
-	
-
-  
-// Store it in a array
-$result = array("$name", "$price");
-  
-// Send in JSON encoded form
-$myJSON = json_encode($result);
-echo $myJSON;
 
 ?>
 
@@ -57,6 +33,7 @@ the modifications include the selection of itens from the table and autocomplete
 <title>Invoice System with PHP & MySQL</title>
 <script src="js/invoice.js"></script>
 <link href="css/style.css" rel="stylesheet">
+
 <?php include('inc/container.php'); ?>
 <div class="container content-invoice">
 	<form action="" id="invoice-form" method="post" class="invoice-form" role="form" novalidate="">
@@ -156,13 +133,16 @@ the modifications include the selection of itens from the table and autocomplete
 								<input class="itemRow"type="checkbox">
 							</td>
 							<td>
-								<input type='text' name="product_id[]" id='product_id' class='form-control'
-									placeholder='Enter the product code' onkeyup="GetDetail(this.value)">
+							<div class="form-group">
+								<input type='text' name="product_id[]" id='productCode' class='form-control'
+									placeholder='Enter the product code' onkeyup="GetDetail(this.value)" value="">
+							</div>
 							</td>
 							<td>
-								<input type="text" name="productName[]" id="productName_1" class="form-control"
+							<div class="form-group">
+								<input type="text" name="productName[]" id="productName" class="form-control"
 							 value="" autocomplete="off">
-							 		
+							</div>
 							</td>
 							<td>
 								<input type="number" name="quantity[]" id="quantity_1" class="form-control quantity"
@@ -259,5 +239,57 @@ the modifications include the selection of itens from the table and autocomplete
 </div>
 </div>
 
+<script>
+
+//Script based on GeeksforGeeks
+//https://www.geeksforgeeks.org/how-to-fill-all-input-fields-automatically-from-database-by-entering-input-in-one-textbox-using-php/
+
+// onkeyup event will occur when the user release the key and calls the function
+// assigned to this event
+function GetDetail(str) {
+	if (str.length == 0) {
+		count =
+		document.getElementById("productName").value = "";
+		document.getElementById("price_1").value = "";
+		return;
+	}
+	else {
+
+		// Creates a new XMLHttpRequest object
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function () {
+
+			// Defines a function to be called when
+			// the readyState property changes
+			if (this.readyState == 4 &&
+				this.status == 200) {
+
+				// Typical action to be performed
+				// when the document is ready
+				var myObj = JSON.parse(this.responseText);
+
+				// Returns the response data as a
+				// string and store this array in
+				// a variable assign the value 
+				// received to first name input field
+
+				document.getElementById
+					("productName").value = myObj[0];
+
+				// Assign the value received to
+				// last name input field
+				document.getElementById(
+					"price_1").value = myObj[1];
+			}
+		};
+
+		// xhttp.open("GET", "filename", true);
+		xmlhttp.open("GET", "product.php?product_id=" + str, true);
+
+		// Sends the request to the server
+		xmlhttp.send();
+	}
+}
+</script>
 
 <?php include('inc/footer.php'); ?>
