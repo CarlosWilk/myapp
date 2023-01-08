@@ -1,17 +1,18 @@
 <?php
   
 // Get the user id 
-$product_id = $_REQUEST['product_id'];
+$productCode = $_REQUEST['productCode'];
+
   
 // Database connection
 $con = mysqli_connect("localhost", "root", "root", "garage");
   
-if ($product_id !== "") {
+if ($productCode !== "") {
       
     // Get corresponding first name and 
     // last name for that user id    
     $query = mysqli_query($con, "SELECT name, 
-    price FROM itens WHERE product_id='$product_id'");
+    price FROM itens WHERE product_id='$productCode'");
   
     $row = mysqli_fetch_array($query);
   

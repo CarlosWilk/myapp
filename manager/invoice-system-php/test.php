@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <input type='text' name="product_id" id='product_id' class='form-control'
+                            <input type='text' name="productCode[]" id='productCode_1' class='form-control'
                                 placeholder='Enter user id' onkeyup="GetDetail(this.value)" value="">
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control"
+                            <input type="text" name="first_name" id="productName_1" class="form-control"
                                 placeholder='Description' value="">
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <input type="text" name="last_name" id="last_name" class="form-control"
+                            <input type="text" name="price[]" id="price_1" class="form-control"
                                 placeholder='price' value="">
                         </div>
                     </div>
@@ -126,14 +126,17 @@
 
         // onkeyup event will occur when the user release the key and calls the function
         // assigned to this event
+
+
         function GetDetail(str) {
+    
             if (str.length == 0) {
-                document.getElementById("first_name").value = "";
+                document.getElementById("productName_1").value = "";
                 document.getElementById("last_name").value = "";
-                return;
+                return;           
             }
             else {
-
+               
                 // Creates a new XMLHttpRequest object
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function () {
@@ -147,18 +150,13 @@
                         // when the document is ready
                         var myObj = JSON.parse(this.responseText);
 
-                        // Returns the response data as a
-                        // string and store this array in
-                        // a variable assign the value 
-                        // received to first name input field
-
                         document.getElementById
-                            ("first_name").value = myObj[0];
+                            ("productName_1").value = myObj[0];
 
                         // Assign the value received to
                         // last name input field
                         document.getElementById(
-                            "last_name").value = myObj[1];
+                            "price_1").value = myObj[1];
                     }
                 };
 
@@ -167,8 +165,16 @@
 
                 // Sends the request to the server
                 xmlhttp.send();
+
+
             }
         }
+
+        const matches = document.querySelectorAll("iframe[productCode]");
+        document.querySelectorAll('productCode');
+
+
+
     </script>
 </body>
 
