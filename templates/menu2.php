@@ -28,7 +28,7 @@ form{
 
 <li><a button type="button" onclick="history.back();" class="btn brand"> Return</a></li>
 <li><a href="calendar.php" class="btn brand z-depth-0"> Book</a></li>
-<li><a href="#" class="btn brand z-depth-0"> Invoices</a></li>
+<li><a href="/customer/myInvoices.php" class="btn brand z-depth-0"> Invoices</a></li>
 <li><a href="logout.php" class="btn brand z-depth-0"> Logout</a></li>
 
 </ul>

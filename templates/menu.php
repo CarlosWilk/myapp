@@ -27,7 +27,7 @@ form{
 
 <li><a href="./booking/calendar.php" class="btn brand"> Book</a></li>
 <li><a href="./booking/dashboard.php" class="btn brand z-depth-0"> My Bookings</a></li>
-<li><a href="#" class="btn brand z-depth-0"> Invoices</a></li>
+<li><a href="./myInvoices.php" class="btn brand z-depth-0"> Invoices</a></li>
 <li><a href="logout.php" class="btn brand z-depth-0"> Logout</a></li>
 
 </ul>
