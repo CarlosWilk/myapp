@@ -140,7 +140,7 @@ the modifications include the selection of itens from the table and autocomplete
 							</td>
 							<td>
 							<div class="form-group">
-								<input type="text" name="productName[]" id="productName" class="form-control"
+								<input type="text" name="productName[]" id="productName_1" class="form-control"
 							 value="" autocomplete="off">
 							</div>
 							</td>
@@ -247,10 +247,10 @@ the modifications include the selection of itens from the table and autocomplete
 // onkeyup event will occur when the user release the key and calls the function
 // assigned to this event
 function GetDetail(str) {
+	console.log("test");
 	if (str.length == 0) {
-		count =
-		document.getElementById("productName").value = "";
-		document.getElementById("price_1").value = "";
+		document.getElementById("productName_1").value = "";
+		document.getElementById("price_1"+count).value = "";
 		return;
 	}
 	else {
@@ -274,7 +274,7 @@ function GetDetail(str) {
 				// received to first name input field
 
 				document.getElementById
-					("productName").value = myObj[0];
+					("productName_1").value = myObj[0];
 
 				// Assign the value received to
 				// last name input field
@@ -284,7 +284,7 @@ function GetDetail(str) {
 		};
 
 		// xhttp.open("GET", "filename", true);
-		xmlhttp.open("GET", "product.php?product_id=" + str, true);
+		xmlhttp.open("GET", "product.php?productCode=" + str, true);
 
 		// Sends the request to the server
 		xmlhttp.send();
