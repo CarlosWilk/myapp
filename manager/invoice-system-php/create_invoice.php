@@ -18,6 +18,10 @@ $all_itens = mysqli_query($mysqli, $sql2);
 $sql3 = "SELECT * FROM mechanics";
 $all_mechanics = mysqli_query($mysqli, $sql3);
 
+//Get all the items from items table
+$sql4 = "SELECT username FROM users";
+$all_customers = mysqli_query($mysqli, $sql4);
+
 $invoice = new Invoice();
 $invoice->checkLoggedIn();
 if (!empty($_POST['companyName']) && $_POST['companyName']) {
@@ -54,37 +58,22 @@ the modifications include the selection of itens from the table and autocomplete
 					<?php echo $_SESSION['email']; ?><br>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-right">
-					<h3>To,</h3>
+					<h3>Customer name:</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" name="companyName" id="companyName"
-							placeholder="Client Name" autocomplete="off">
-						<label>Select a vehicle</label>
-						<select name="client">
-							<?php
-							// use a while loop to fetch data
-							// from the $all_categories variable
-							// and individually display as an option
-							while (
-								$category = mysqli_fetch_array(
-									$all_categories,
-									MYSQLI_ASSOC
-								)
-							):
-								;
-								?>
-								<option value="<?php echo $category["license"];
-								// The value we usually set is the primary key
-								?>">
-									<?php echo $category["license"];
-									// To show the category name to the user
-									?>
-								</option>
-								<?php
-							endwhile;
-							// While loop must be terminated
-							?>
-						</select>
+						<input type="text" class="form-control" name="companyName" id="companyName" placeholder="Company Name" autocomplete="off">
 					</div>
+					<div class="form-group">
+						<textarea class="form-control" rows="3" name="address" id="address" placeholder="Your Address"></textarea>
+					</div>
+				</div>
+					</div>
+					<!-- <div class="form-group">
+						<input type="text" class="form-control" name="companyName" id="companyName"
+							placeholder="Client Name" autocomplete="off"> -->
+							<h4> Vehicle </h4>
+						<div class="form-group">
+							<input type="text" class="form-control" name="vehicle">
+						</div>
 					<div class="form-group">
 					<label>Select a mechanic</label>
 					<select name="mechanic">
@@ -185,7 +174,7 @@ the modifications include the selection of itens from the table and autocomplete
 						<div class="form-group">
 							<label>Subtotal: &nbsp;</label>
 							<div class="input-group">
-								<div class="input-group-addon currency">$</div>
+								<div class="input-group-addon currency">€</div>
 								<input value="" type="number" class="form-control" name="subTotal" id="subTotal"
 									placeholder="Subtotal">
 							</div>
@@ -201,15 +190,23 @@ the modifications include the selection of itens from the table and autocomplete
 						<div class="form-group">
 							<label>Tax Amount: &nbsp;</label>
 							<div class="input-group">
-								<div class="input-group-addon currency">$</div>
+								<div class="input-group-addon currency">€</div>
 								<input value="" type="number" class="form-control" name="taxAmount" id="taxAmount"
 									placeholder="Tax Amount">
 							</div>
 						</div>
 						<div class="form-group">
+							<label>Service: &nbsp;</label>
+							<div class="input-group">
+								<div class="input-group-addon currency">€</div>
+								<input value="" type="number" class="form-control" name="feeService" id="feeService"
+									placeholder="Service fee">
+							</div>
+						</div>
+						<div class="form-group">
 							<label>Total: &nbsp;</label>
 							<div class="input-group">
-								<div class="input-group-addon currency">$</div>
+								<div class="input-group-addon currency">€</div>
 								<input value="" type="number" class="form-control" name="totalAftertax"
 									id="totalAftertax" placeholder="Total">
 							</div>
@@ -217,7 +214,7 @@ the modifications include the selection of itens from the table and autocomplete
 						<div class="form-group">
 							<label>Amount Paid: &nbsp;</label>
 							<div class="input-group">
-								<div class="input-group-addon currency">$</div>
+								<div class="input-group-addon currency">€</div>
 								<input value="" type="number" class="form-control" name="amountPaid" id="amountPaid"
 									placeholder="Amount Paid">
 							</div>

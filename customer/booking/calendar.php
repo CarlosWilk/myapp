@@ -177,7 +177,7 @@ function checkSlots($mysqli, $date){
 a:link, a:visited {
   background-color: #366ff4;
   color: white;
-  padding: 15px 25px;
+  padding: 5px 25px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -219,7 +219,7 @@ a:hover, a:active {
                 
 /* Behave like a row*/
 border: none;
-border-bottom: 1px solid #eee;
+border-bottom: 2px solid #eee;
 position: relative;
 padding-left: 50%;
             }
@@ -268,7 +268,6 @@ padding-left: 50%;
 </head>
 
 <body>
-<button type="button" onclick="history.back();">Back</button>
 
     <div class="container">
         <div class="row">

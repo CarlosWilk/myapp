@@ -41,7 +41,8 @@
 	});	
 	$(document).on('blur', "#amountPaid", function(){
 		var amountPaid = $(this).val();
-		var totalAftertax = $('#totalAftertax').val();	
+		var fee = $(this).val();
+		var totalAftertax = $('#totalAftertax').val(); // + $('#feeService').val();	
 		if(amountPaid && totalAftertax) {
 			totalAftertax = totalAftertax-amountPaid;			
 			$('#amountDue').val(totalAftertax);

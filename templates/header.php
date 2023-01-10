@@ -17,12 +17,14 @@ form{
 </style>
 </head>
 
-<body class="blue lighten-3">
+<body class="blue lighten-5">
     <nav class="white z-depth-0"> <!-- by default give no depth -->
     <div class="container">  <!-- central column -->
-
+    <img src="https://www.clipartmax.com/png/small/288-2885395_small-car-unit-currency-logo.png" height="50px" weight="50px" alt="Small Car - Unit Currency Logo @clipartmax.com">
     <a href="index.php" class="brand-logo brand-text">Ger's Garage</a>
 <ul id="nav-mobile" class="right hide-on-small-and-down">
+<li><a href="./website/about.php" class="btn brand"> About us </a></li>
+<li><a href="./website/services.php" class="btn brand"> Services </a></li>
 <li><a href="./customer/login.php" class="btn brand"> Login </a></li>
 <li><a href="./manager/invoice-system-php/index.php" class="btn brand">Admin </a></li>
 </ul>

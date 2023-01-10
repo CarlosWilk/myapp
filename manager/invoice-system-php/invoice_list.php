@@ -5,7 +5,9 @@ include 'Invoice.php';
 $invoice = new Invoice();
 $invoice->checkLoggedIn();
 ?>
-<title>phpzag.com : Demo Build Invoice System with PHP & MySQL</title>
+
+<!--Source code: phpzag.com -->
+<title>Invoice System</title>
 <script src="js/invoice.js"></script>
 <link href="css/style.css" rel="stylesheet">
 <?php include('inc/container.php');?>

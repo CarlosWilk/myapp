@@ -21,7 +21,7 @@ form{
 <body class="blue lighten-3">
     <nav class="white z-depth-0"> <!-- by default give no depth -->
     <div class="container">  <!-- central column -->
-
+    <img src="https://www.clipartmax.com/png/small/288-2885395_small-car-unit-currency-logo.png" height="50px" weight="50px" alt="Small Car - Unit Currency Logo @clipartmax.com">
     <a href="/customer/welcome.php" class="brand-logo brand-text">Ger's Garage</a>
 <ul id="nav-mobile" class="right hide-on-small-and-down">
 

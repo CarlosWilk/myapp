@@ -30,7 +30,7 @@ form{
 <ul id="nav-mobile" class="right hide-on-small-and-down">
 
 <li><a button type="button" onclick="history.back();" class="btn brand"> Return</a></li>
-<li><a href="dashboard.php" class="btn brand z-depth-0"> My bookings</a></li>
+<li><a button type="button" onclick="location.href='./dashboard.php'" class="btn brand z-depth-0"> My bookings</a></li>
 <li><a href="#" class="btn brand z-depth-0"> Invoices</a></li>
 <li><a href="./customer/logout.php" class="btn brand z-depth-0"> Logout</a></li>
 
