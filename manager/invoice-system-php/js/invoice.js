@@ -15,7 +15,7 @@
 		var htmlRows = '';
 		htmlRows += '<tr>';
 		htmlRows += '<td><input class="itemRow" type="checkbox"></td>';          
-		htmlRows += '<td><input type="text" name="productCode[]" id="productCode_'+count+'" class="form-control" ></td>';          
+		htmlRows += '<td><input type="text" name="productCode[]" id="productCode_'+count+'" class="form-control" onkeyup="GetDetail(this.value,'+count+')"></td>';          
 		htmlRows += '<td><input type="text" name="productName[]" id="productName_'+count+'" class="form-control" autocomplete="off"></td>';	
 		htmlRows += '<td><input type="number" name="quantity[]" id="quantity_'+count+'" class="form-control quantity" autocomplete="off"></td>';   		
 		htmlRows += '<td><input type="number" name="price[]" id="price_'+count+'" class="form-control price" autocomplete="off"></td>';		 
@@ -87,10 +87,12 @@ function calculateTotal(){
 	var taxRate = $("#taxRate").val();
 	var subTotal = $('#subTotal').val();	
 	if(subTotal) {
+		var fee = $('#feeService').val();
 		var taxAmount = subTotal*taxRate/100;
 		$('#taxAmount').val(taxAmount);
 		subTotal = parseFloat(subTotal)+parseFloat(taxAmount);
-		$('#totalAftertax').val(subTotal);		
+
+		$('#totalAftertax').val(subTotal)+parseFloat(fee);		
 		var amountPaid = $('#amountPaid').val();
 		var totalAftertax = $('#totalAftertax').val();	
 		if(amountPaid && totalAftertax) {

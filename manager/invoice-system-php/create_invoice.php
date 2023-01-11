@@ -60,17 +60,18 @@ the modifications include the selection of itens from the table and autocomplete
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-right">
 					<h3>Customer name:</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" name="companyName" id="companyName" placeholder="Company Name" autocomplete="off">
+						<input type="text" class="form-control" name="companyName" id="companyName" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<textarea class="form-control" rows="3" name="address" id="address" placeholder="Your Address"></textarea>
+						<textarea class="form-control" rows="3" name="address" id="address" placeholder="Your phone"></textarea>
 					</div>
 				</div>
 					</div>
-					<!-- <div class="form-group">
-						<input type="text" class="form-control" name="companyName" id="companyName"
-							placeholder="Client Name" autocomplete="off"> -->
-							<h4> Vehicle </h4>
+					<div class="form-group">
+						<input type="text" class="form-control" name="vehicleLicense" id="vehicleLicense"
+							placeholder="Vehicle Model" autocomplete="off">
+					</div>
+							<h4> Vehicle License</h4>
 						<div class="form-group">
 							<input type="text" class="form-control" name="vehicle">
 						</div>
@@ -123,8 +124,8 @@ the modifications include the selection of itens from the table and autocomplete
 							</td>
 							<td>
 							<div class="form-group">
-								<input type='text' name="product_id[]" id='productCode' class='form-control'
-									placeholder='Enter the product code' onkeyup="GetDetail(this.value)" value="">
+								<input type='text' name="productCode[]" id='productCode_1' class='form-control'
+									placeholder='Enter the product code' onkeyup="GetDetail(this.value, 1)" value="">
 							</div>
 							</td>
 							<td>
@@ -243,12 +244,13 @@ the modifications include the selection of itens from the table and autocomplete
 
 // onkeyup event will occur when the user release the key and calls the function
 // assigned to this event
-function GetDetail(str) {
-	console.log("test");
+function GetDetail(str, count) {
+
+	//Nothing was typed
 	if (str.length == 0) {
-		document.getElementById("productName_1").value = "";
-		document.getElementById("price_1"+count).value = "";
-		return;
+		document.getElementById("productName_"+count).value = "";
+		document.getElementById("price_"+count).value = "";
+		return "not found";
 	}
 	else {
 
@@ -271,12 +273,12 @@ function GetDetail(str) {
 				// received to first name input field
 
 				document.getElementById
-					("productName_1").value = myObj[0];
+					("productName_"+count).value = myObj[0];
 
 				// Assign the value received to
 				// last name input field
 				document.getElementById(
-					"price_1").value = myObj[1];
+					"price_"+count).value = myObj[1];
 			}
 		};
 

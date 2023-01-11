@@ -1,9 +1,8 @@
 <?php
   
-// Get the user id 
+// Get the product id 
 $productCode = $_REQUEST['productCode'];
 
-  
 // Database connection
 $con = mysqli_connect("localhost", "root", "root", "garage");
   
