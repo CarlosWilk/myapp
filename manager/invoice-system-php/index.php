@@ -43,7 +43,7 @@ if (!empty($_POST['email']) && !empty($_POST['pwd'])) {
 			</div>
 		</form>
 		<br>
-		<p><b>Email</b> : gersgarage@gmail.com<br><b>Password</b> : 12345</p>			
+			
 	</div>		
 </div>		
 </div>

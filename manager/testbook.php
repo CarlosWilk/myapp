@@ -104,8 +104,15 @@ where bookings.id = $bookingID");
                 </div>
                 <div class="form-group">
                     <label>Select a status</label>
-                        <select name="Category">
-                        <?php
+                        <select name="status">
+                            <option></option>
+  
+                            <option value="1"> Booked </option>
+
+                            <option value="2"> Cliente 2 </option>
+
+                            <option value="3"> Cliente 3 </option>
+                        <!-- <?php
                         // use a while loop to fetch data
                         // from the $all_categories variable
                         // and individually display as an option
@@ -125,7 +132,7 @@ where bookings.id = $bookingID");
                             <?php
                         endwhile;
                         // While loop must be terminated
-                        ?>
+                        ?> -->
                     </select>
                 </div>
 

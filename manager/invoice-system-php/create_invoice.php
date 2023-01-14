@@ -6,9 +6,29 @@ include 'Invoice.php';
 
 $mysqli = new mysqli('localhost', 'root', 'root', 'garage');
 
-// Get all the categories from category table
-$sql = "SELECT * FROM vehicles";
-$all_categories = mysqli_query($mysqli, $sql);
+$bookingID = $_GET['id'];
+
+// Get all the vehicles licenses from booking table
+$sqlBookings = "SELECT id, name, phone, vehicle_license, vehicle_type FROM bookings where id=$bookingID";
+
+$result = $mysqli->query($sqlBookings);
+
+if ($result->num_rows > 0) {
+
+	while ($booking_data = mysqli_fetch_assoc($result)) {
+
+		$id = $booking_data['id'];
+		$name = $booking_data['name'];
+		$phone = $booking_data['phone'];
+		$vehicle_license = $booking_data['vehicle_license'];
+		$vehicle_type = $booking_data['vehicle_type'];
+
+	}
+}
+
+//Get all the items from items table
+$sql1 = "SELECT id FROM bookings";
+$all_bookings = mysqli_query($mysqli, $sql1);
 
 //Get all the items from items table
 $sql2 = "SELECT name, price FROM itens";
@@ -17,10 +37,6 @@ $all_itens = mysqli_query($mysqli, $sql2);
 //Get all the items from items table
 $sql3 = "SELECT * FROM mechanics";
 $all_mechanics = mysqli_query($mysqli, $sql3);
-
-//Get all the items from items table
-$sql4 = "SELECT username FROM users";
-$all_customers = mysqli_query($mysqli, $sql4);
 
 $invoice = new Invoice();
 $invoice->checkLoggedIn();
@@ -60,10 +76,17 @@ the modifications include the selection of itens from the table and autocomplete
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pull-right">
 					<h3>Customer name:</h3>
 					<div class="form-group">
-						<input type="text" class="form-control" name="companyName" id="companyName" autocomplete="off">
+						<input type="text" class="form-control" name="companyName" id="companyName" value="<?php echo $name ?>" autocomplete="off">
 					</div>
 					<div class="form-group">
-						<textarea class="form-control" rows="3" name="address" id="address" placeholder="Your phone"></textarea>
+						<input type="text" class="form-control" name="address" id="address" value="<?php echo $phone ?>"></textarea>
+					</div>
+					<div class="form-group">
+						<label>Booking ID <label>
+							<input type="text" name="booking_id" value="<?php echo $bookingID ?>">
+							
+					</div>
+
 					</div>
 				</div>
 					</div>
@@ -71,10 +94,11 @@ the modifications include the selection of itens from the table and autocomplete
 						<input type="text" class="form-control" name="vehicleLicense" id="vehicleLicense"
 							placeholder="Vehicle Model" autocomplete="off">
 					</div>
-							<h4> Vehicle License</h4>
-						<div class="form-group">
-							<input type="text" class="form-control" name="vehicle">
-						</div>
+					<div>
+						<lable>Select a vehicle</label>
+							<input type="text" class="form-control" name="vehicle_type" value="<?php echo $vehicle_license?>">
+
+					</div>
 					<div class="form-group">
 					<label>Select a mechanic</label>
 					<select name="mechanic">
