@@ -1,11 +1,11 @@
 <ul class="nav navbar-nav">
 <li class="dropdown">
-	<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Invoice
+	<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">Menu
 	<span class="caret"></span></button>
 	<ul class="dropdown-menu">
 		<li><a href="invoice_list.php">Invoice List</a></li>
 		<li><a href="create_invoice.php">Create Invoice</a></li>	
-		<li><a href="dashboard.php"> Check bookings</a></li>			  
+		<li><a href="/myapp/manager/dashboard.php"> Check bookings</a></li>			  
 	</ul>
 </li>
 <?php 

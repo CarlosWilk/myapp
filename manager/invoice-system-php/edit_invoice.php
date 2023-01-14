@@ -64,7 +64,7 @@ if(!empty($_GET['update_id']) && $_GET['update_id']) {
 							?>								
 							<tr>
 								<td><input class="itemRow" type="checkbox"></td>
-								<td><input type="text" value="<?php echo $invoiceItem["item_code"]; ?>" name="productCode[]" id="productCode_<?php echo $count; ?>" class="form-control" autocomplete="off"></td>
+								<td><input type="text" value="<?php echo $invoiceItem["item_code"]; ?>" name="productCode[]" id="productCode_<?php echo $count; ?>" class="form-control" onkeyup="GetDetail(this.value, 1)" autocomplete="off" ></td>
 								<td><input type="text" value="<?php echo $invoiceItem["item_name"]; ?>" name="productName[]" id="productName_<?php echo $count; ?>" class="form-control" autocomplete="off"></td>			
 								<td><input type="number" value="<?php echo $invoiceItem["order_item_quantity"]; ?>" name="quantity[]" id="quantity_<?php echo $count; ?>" class="form-control quantity" autocomplete="off"></td>
 								<td><input type="number" value="<?php echo $invoiceItem["order_item_price"]; ?>" name="price[]" id="price_<?php echo $count; ?>" class="form-control price" autocomplete="off"></td>
@@ -92,6 +92,7 @@ if(!empty($_GET['update_id']) && $_GET['update_id']) {
 							<input type="hidden" value="<?php echo $_SESSION['userid']; ?>" class="form-control" name="userId">
 							<input type="hidden" value="<?php echo $invoiceValues['order_id']; ?>" class="form-control" name="invoiceId" id="invoiceId">
 			      			<input data-loading-text="Updating Invoice..." type="submit" name="invoice_btn" value="Save Invoice" class="btn btn-success submit_btn invoice-save-btm">
+							<input type="cancel" onclick="window.location='invoice_list.php';return false;" value="Cancel" class="btn btn-danger">
 			      		</div>
 						
 		      		</div>
@@ -146,5 +147,61 @@ if(!empty($_GET['update_id']) && $_GET['update_id']) {
 	      	</div>
 		</form>			
     </div>
+	
 </div>	
+
+<script>
+
+//Script based on GeeksforGeeks
+//https://www.geeksforgeeks.org/how-to-fill-all-input-fields-automatically-from-database-by-entering-input-in-one-textbox-using-php/
+
+// onkeyup event will occur when the user release the key and calls the function
+// assigned to this event
+function GetDetail(str, count) {
+
+	//Nothing was typed
+	if (str.length == 0) {
+		document.getElementById("productName_"+count).value = "";
+		document.getElementById("price_"+count).value = "";
+		return "not found";
+	}
+	else {
+
+		// Creates a new XMLHttpRequest object
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function () {
+
+			// Defines a function to be called when
+			// the readyState property changes
+			if (this.readyState == 4 &&
+				this.status == 200) {
+
+				// Typical action to be performed
+				// when the document is ready
+				var myObj = JSON.parse(this.responseText);
+
+				// Returns the response data as a
+				// string and store this array in
+				// a variable assign the value 
+				// received to first name input field
+
+				document.getElementById
+					("productName_"+count).value = myObj[0];
+
+				// Assign the value received to
+				// last name input field
+				document.getElementById(
+					"price_"+count).value = myObj[1];
+			}
+		};
+
+		// xhttp.open("GET", "filename", true);
+		xmlhttp.open("GET", "product.php?productCode=" + str, true);
+
+		// Sends the request to the server
+		xmlhttp.send();
+	}
+}
+</script>
+
 <?php include('inc/footer.php');?>

@@ -1,22 +1,11 @@
 <?php
 
-require("/xampp/htdocs/myapp/templates/menu3.php");
+require("/xampp/htdocs/myapp/templates/menu.php");
+
+$mysqli = require("/xampp/htdocs/myapp/customer/conf.php");
 function build_calendar($month, $year){
 
     $mysqli = new mysqli('localhost', 'root', 'root', 'garage');
-    /*$stmt = $mysqli->prepare("SELECT * from bookings where MONTH(date) = ? AND YEAR(date) = ?");
-    $stmt->bind_param('ss', $month, $year);
-    $bookings = array();
-
-    if($stmt->execute()){
-        $result = $stmt->get_result();
-        if($result->num_rows>0){
-            while($row = $result->fetch_assoc()){
-                $bookings[] = $row['date'];
-            }
-            $stmt->close();
-        }
-    }*/
 
     //Array containing days of the week
     $daysOfWeek = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday');
@@ -114,12 +103,6 @@ function build_calendar($month, $year){
                 <br><small><i>$availableslots slots left<i></small>";
             }
         }
-        // if(in_array($date,$bookings)){
-        //     $calendar.="<td class='$today'><h4>$currentDay</h4><a class='btn btn-danger btn-xs'>Booked</a></td>";
-
-        // } else {
-        //     $calendar.="<td class='$today'><h4>$currentDay</h4><a class='btn btn-success btn-xs'>Book</a></td>";
-        // }
 
         $calendar.="</td>";
       

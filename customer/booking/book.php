@@ -1,25 +1,40 @@
 <?php
 
+//Remember the data from the login
 session_start();
 
-$mysqli = new mysqli('localhost', 'root', 'root', 'garage');
+//Get the user id in order to retrieve information from the database
+$userID = $_SESSION['id'];
+
+//Require the connection to the database
+require_once("/xampp/htdocs/myapp/customer/conf.php");
 
 // Get all the categories from category table
-$sql = "SELECT * FROM bookingid";
-$all_categories = mysqli_query($mysqli, $sql);
+$sql = "SELECT * FROM booking_type";
+$all_categories = mysqli_query($link, $sql);
 
 // Get all the categories from vechile type table
 $sql1 = "SELECT * FROM vehicle_type";
-$all_types = mysqli_query($mysqli, $sql1);
+$all_types = mysqli_query($link, $sql1);
 
 // Get all the categories from vechile type table
 $sql2 = "SELECT * FROM vehicle_engine";
-$all_engines = mysqli_query($mysqli, $sql2);
+$all_engines = mysqli_query($link, $sql2);
+
+//Get the customer information such as name and email from the database
+$sql3 = "SELECT fullname, email FROM users WHERE id = '$userID'";
+$allcustomer = mysqli_query($link,$sql3);
+
+//array to store the information about the customer
+$userInfo = mysqli_fetch_array(
+    $allcustomer,
+    MYSQLI_ASSOC
+);
 
 
 if (isset($_GET['date'])) {
     $date = $_GET['date'];
-    $stmt = $mysqli->prepare("SELECT * from bookings where date =?");
+    $stmt = $link->prepare("SELECT * from bookings where date =?");
     $stmt->bind_param('s', $date);
     $bookings = array();
 
@@ -47,7 +62,7 @@ if (isset($_POST['submit'])) {
     $id = $_POST['userID'];
 
 
-    $stmt = $mysqli->prepare("SELECT * from bookings where date =? AND timeslot =?");
+    $stmt = $link->prepare("SELECT * from bookings where date =? AND timeslot =?");
     $stmt->bind_param('ss', $date, $timeslot);
 
     if ($stmt->execute()) {
@@ -55,13 +70,13 @@ if (isset($_POST['submit'])) {
         if ($result->num_rows > 0) {
             $msg = "<div class='alert alert-danger'> Already booked</div>";
         } else {
-            $stmt = $mysqli->prepare("INSERT INTO bookings (name, phone, email, date, timeslot, vehicle_type, vehicle_license, engine_type, booking_id, comments, username_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt = $link->prepare("INSERT INTO bookings (name, phone, email, date, timeslot, vehicle_type, vehicle_license, engine_type, booking_type, comments, username_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
             $stmt->bind_param('sssssisiiss', $name, $phone, $email, $date, $timeslot, $vehicle_type, $vehicle_license, $vehicle_engine, $bookingId,$comments,$id );
             $stmt->execute();
             $msg = "<div class='alert alert-success'> Booking Successfull</div>";
             $bookings[] = $timeslot;
             $stmt->close();
-            $mysqli->close();
+            $link->close();
 
         }
     }
@@ -173,7 +188,7 @@ function timeslots($duration, $cleanup, $start, $end)
                                         </div>
                                         <div class="form-group">
                                             <label for="">Name</label>
-                                            <input required type="text" name="name" class="form-control">
+                                            <input required type="text" name="name" class="form-control" value="<?php echo $userInfo['fullname']; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="">Phone</label>
@@ -181,7 +196,7 @@ function timeslots($duration, $cleanup, $start, $end)
                                         </div>
                                         <div class="form-group">
                                             <label for="">Email</label>
-                                            <input required type="email" name="email" class="form-control">
+                                            <input required type="email" name="email" class="form-control" value="<?php echo $userInfo['email']; ?>">
                                         </div>
                                         <label>Select a Category</label>
                                         <select name="Category">

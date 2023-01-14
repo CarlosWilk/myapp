@@ -20,16 +20,16 @@ form{
 
 <body class="blue lighten-3">
     <nav class="white z-depth-0"> <!-- by default give no depth -->
-    <div class="container">  <!-- central column -->
-    <img src="https://www.clipartmax.com/png/small/288-2885395_small-car-unit-currency-logo.png" height="50px" weight="50px" alt="Small Car - Unit Currency Logo @clipartmax.com">
-    <a href="/customer/welcome.php" class="brand-logo brand-text">Ger's Garage</a>
-<ul id="nav-mobile" class="right hide-on-small-and-down">
+        <div class="container">  <!-- central column -->
+            <img src="https://www.clipartmax.com/png/small/288-2885395_small-car-unit-currency-logo.png" height="50px" weight="50px" alt="Small Car - Unit Currency Logo @clipartmax.com">
+                <a href="/myapp/customer/welcome.php" class="brand-logo brand-text">Ger's Garage</a>
+                    <ul id="nav-mobile" class="right hide-on-small-and-down">
 
-<li><a href="./booking/calendar.php" class="btn brand"> Book</a></li>
-<li><a href="./booking/dashboard.php" class="btn brand z-depth-0"> My Bookings</a></li>
-<li><a href="./myInvoices.php" class="btn brand z-depth-0"> Invoices</a></li>
-<li><a href="logout.php" class="btn brand z-depth-0"> Logout</a></li>
+                        <li><a href="/myapp/customer/booking/calendar.php" class="btn brand"> Book</a></li>
+                        <li><a href="/myapp/customer/booking/dashboard.php" class="btn brand z-depth-0"> My Bookings</a></li>
+                        <li><a href="/myapp/customer/myInvoices.php" class="btn brand z-depth-0"> Invoices</a></li>
+                        <li><a href="logout.php" class="btn brand z-depth-0"> Logout</a></li>
 
-</ul>
-    </div>
+                    </ul>
+        </div>
     </nav>

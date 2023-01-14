@@ -7,12 +7,12 @@ $invoice->checkLoggedIn();
 ?>
 
 <!--Source code: phpzag.com -->
-<title>Invoice System</title>
+<title>Invoice System </title>
 <script src="js/invoice.js"></script>
 <link href="css/style.css" rel="stylesheet">
 <?php include('inc/container.php');?>
 	<div class="container">		
-	  <h2 class="title">Invoice System</h2>
+	  <h2 class="title">Invoice System - Ger's Garage</h2>
 	  <?php include('menu.php');?>			  
       <table id="data-table" class="table table-condensed table-striped">
         <thead>

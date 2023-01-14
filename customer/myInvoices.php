@@ -4,7 +4,7 @@
 session_start();
 
 //Display the menu
-require("/xampp/htdocs/myapp/templates/menu2.php");
+require("/xampp/htdocs/myapp/templates/menu.php");
 
 //Store the name of the user logged in
 $username = $_SESSION['username'];

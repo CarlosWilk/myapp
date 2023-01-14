@@ -25,7 +25,7 @@ if (!empty($_POST['email']) && !empty($_POST['pwd'])) {
 <?php include('inc/container.php');?>
 <div class="row">	
 	<div class="login-form">		
-		<h4>Invoice Admin Login:</h4>		
+		<h4>Admin System:</h4>		
 		<form method="post" action="">
 			<div class="form-group">
 			<?php if ($loginError ) { ?>

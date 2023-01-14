@@ -1,25 +1,43 @@
 <?php
+
+//Page to search a product in the database
   
 // Get the product id 
 $productCode = $_REQUEST['productCode'];
 
+$name = null;
+$price = null;
+
 // Database connection
-$con = mysqli_connect("localhost", "root", "root", "garage");
+require_once("/xampp/htdocs/myapp/customer/conf.php");
   
 if ($productCode !== "") {
       
-    // Get corresponding first name and 
-    // last name for that user id    
-    $query = mysqli_query($con, "SELECT name, 
-    price FROM itens WHERE product_id='$productCode'");
+    // Get corresponding product name and 
+    // price for that product code    
+    $sql = "SELECT name, 
+    price FROM itens WHERE product_id=?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param('s', $productCode);
+
+
+    if ($stmt -> execute()){
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_array(MYSQLI_ASSOC);
   
-    $row = mysqli_fetch_array($query);
-  
-    // Get the first name
-    $name = $row["name"];
-  
-    // Get the first name
-    $price = $row["price"];
+        // Get the first name
+        $name = $row["name"];
+      
+        // Get the first name
+        $price = $row["price"];
+
+
+    } else {
+
+        error_log("Product not found");
+    }
+   
 }
   
 // Store it in a array
