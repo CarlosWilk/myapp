@@ -15,7 +15,7 @@ require_once("/xampp/htdocs/myapp/customer/conf.php");
 
 
 //By default will be displayed all the bookings
-$query = ("SELECT bookings.id, name, phone, date, timeslot, booking_type.booking_name, comments, booking_status.status_desc FROM bookings LEFT JOIN booking_status ON bookings.status = booking_status.status_id LEFT JOIN booking_type on bookings.booking_type = booking_type.id");
+$query = ("SELECT bookings.id, name, phone, date, timeslot, booking_type.booking_name, comments, booking_status.status_desc FROM bookings LEFT JOIN booking_status ON bookings.status = booking_status.status_id LEFT JOIN booking_type on bookings.booking_type = booking_type.id where status <> 4");
 
 if (isset($_POST['all'])) {
     //Show all the booking for the current day

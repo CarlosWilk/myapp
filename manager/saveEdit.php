@@ -6,16 +6,15 @@ if(isset($_POST['update']))
     {
 
     $bookingID = $_POST['id'];
-    $booking_status = $_POST['bstatus'];
+    $selectOption = $_POST['status'];
 
 
-    $sqlUpdate = "UPDATE bookings SET status='$booking_status' where id='$bookingID'";
+    $sqlUpdate = "UPDATE bookings SET status='$selectOption' where id='$bookingID'";
 
     print($sqlUpdate);
 
     $result = $link->query($sqlUpdate);
-
     
-
 }
 
+header('Location: editbook.php');

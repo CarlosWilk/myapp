@@ -106,33 +106,12 @@ where bookings.id = $bookingID");
                     <label>Select a status</label>
                         <select name="status">
                             <option></option>
-  
                             <option value="1"> Booked </option>
+                            <option value="2"> In service </option>
+                            <option value="3"> Fixed/Completed </option>
+                            <option value="4"> Collected </option>
+                            <option value="5"> Unrepairable </option>
 
-                            <option value="2"> Cliente 2 </option>
-
-                            <option value="3"> Cliente 3 </option>
-                        <!-- <?php
-                        // use a while loop to fetch data
-                        // from the $all_categories variable
-                        // and individually display as an option
-                        while (
-                            $status = mysqli_fetch_array(
-                                $all_status,
-                                MYSQLI_ASSOC
-                            )
-                        ):
-                            ;
-                            ?>
-                            <option value="<?php echo $status['status_id']; ?>">
-
-
-                                <?php echo $status['status_desc']; ?>
-                            </option>
-                            <?php
-                        endwhile;
-                        // While loop must be terminated
-                        ?> -->
                     </select>
                 </div>
 
