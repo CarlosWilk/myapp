@@ -16,4 +16,7 @@ In order to use the application, download this repository and additionally:
 - **XAMPP** for localhost
 - Download the sql file in the database folder
 
+##### Author
+Carlos Wilker
+<p> Project developed for CCT College Dublin
 
