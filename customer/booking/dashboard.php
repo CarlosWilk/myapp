@@ -8,6 +8,7 @@ require("/xampp/htdocs/myapp/templates/menu.php");
 //Variable to hold the connection to the database
 $conn = require("/xampp/htdocs/myapp/customer/conf.php");
 
+
 $username = "root";
 $password = "root";
 $database = "garage";

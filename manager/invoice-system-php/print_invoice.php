@@ -1,6 +1,10 @@
 <?php
 session_start();
 include 'Invoice.php';
+
+//Include connection to the database
+require_once("/xampp/htdocs/myapp/customer/conf.php");
+
 $invoice = new Invoice();
 $invoice->checkLoggedIn();
 if(!empty($_GET['invoice_id']) && $_GET['invoice_id']) {
@@ -8,6 +12,24 @@ if(!empty($_GET['invoice_id']) && $_GET['invoice_id']) {
 	$invoiceValues = $invoice->getInvoice($_GET['invoice_id']);		
 	$invoiceItems = $invoice->getInvoiceItems($_GET['invoice_id']);		
 }
+
+
+    // Get all the status from booking status table
+    $sqlStatus = "SELECT vehicle_type.type_name, vehicle_license FROM bookings LEFT JOIN vehicle_type on vehicle_type.type_id = bookings.vehicle_type";
+    $all_status = mysqli_query($link, $sqlStatus);
+
+    $result = $link->query($sqlStatus);
+
+if ($result->num_rows > 0) {
+
+	while ($booking_data = mysqli_fetch_assoc($result)) {
+
+		$model = $booking_data['type_name'];
+		$license = $booking_data['vehicle_license'];
+	}
+}
+
+
 $invoiceDate = date("d/M/Y, H:i:s", strtotime($invoiceValues['order_date']));
 $output = '';
 $output .= '<table width="100%" border="1" cellpadding="5" cellspacing="0">
@@ -22,11 +44,16 @@ $output .= '<table width="100%" border="1" cellpadding="5" cellspacing="0">
 	To,<br />
 	<b>RECEIVER (BILL TO)</b><br />
 	Name : '.$invoiceValues['order_receiver_name'].'<br /> 
-	Billing Address : '.$invoiceValues['order_receiver_address'].'<br />
+	Phone number : '.$invoiceValues['order_receiver_address'].'<br />
+	Vehicle Model: '.$model.'<br />
+	Vehicle License: '.$license.'<br />
+
 	</td>
-	<td width="35%">         
+	<td width="35%">
+	Booking id: '.$invoiceValues['booking_id'].'<br />         
 	Invoice No. : '.$invoiceValues['order_id'].'<br />
 	Invoice Date : '.$invoiceDate.'<br />
+	Notes: '.$invoiceValues['note'].'<br />
 	</td>
 	</tr>
 	</table>
@@ -65,6 +92,10 @@ $output .= '
 	<tr>
 	<td align="right" colspan="5">Tax Amount: </td>
 	<td align="left">'.$invoiceValues['order_total_tax'].'</td>
+	</tr>
+	<tr>
+	<td align="right" colspan="5">Service fee: </td>
+	<td align="left">'.$invoiceValues['service_fee'].'</td>
 	</tr>
 	<tr>
 	<td align="right" colspan="5">Total: </td>
