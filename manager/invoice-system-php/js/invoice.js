@@ -41,8 +41,7 @@
 	});	
 	$(document).on('blur', "#amountPaid", function(){
 		var amountPaid = $(this).val();
-		var fee = $(this).val();
-		var totalAftertax = $('#totalAftertax').val(); // + $('#feeService').val();	
+		var totalAftertax = $('#totalAftertax').val(); 
 		if(amountPaid && totalAftertax) {
 			totalAftertax = totalAftertax-amountPaid;			
 			$('#amountDue').val(totalAftertax);
@@ -86,13 +85,12 @@ function calculateTotal(){
 	$('#subTotal').val(parseFloat(totalAmount));	
 	var taxRate = $("#taxRate").val();
 	var subTotal = $('#subTotal').val();	
+	var fee = $('#feeService').val(); //not calculating properly
 	if(subTotal) {
-		var fee = $('#feeService').val();
 		var taxAmount = subTotal*taxRate/100;
 		$('#taxAmount').val(taxAmount);
-		subTotal = parseFloat(subTotal)+parseFloat(taxAmount);
-
-		$('#totalAftertax').val(subTotal)+parseFloat(fee);		
+		subTotal = parseFloat(subTotal)+parseFloat(taxAmount)+parseFloat(fee);
+		$('#totalAftertax').val(subTotal);		
 		var amountPaid = $('#amountPaid').val();
 		var totalAftertax = $('#totalAftertax').val();	
 		if(amountPaid && totalAftertax) {
