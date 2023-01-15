@@ -6,14 +6,8 @@ session_start();
 require("/xampp/htdocs/myapp/templates/menu.php");
 
 //Variable to hold the connection to the database
-$conn = require("/xampp/htdocs/myapp/customer/conf.php");
+$link = require("/xampp/htdocs/myapp/customer/conf.php");
 
-
-$username = "root";
-$password = "root";
-$database = "garage";
-
-$mysqli = new mysqli("localhost", $username, $password, $database);
 
 //SQL query
 $query = ("SELECT date, timeslot,vehicle_license, booking_type.booking_name, comments, booking_status.status_desc 
@@ -21,7 +15,7 @@ FROM bookings LEFT JOIN booking_type on bookings.booking_type = booking_type.id 
 where username_id = '".$_SESSION['id']."'");
 
 // Execute the query (the recordset $rs contains the result)
-$rs = mysqli_query($mysqli, $query);
+$rs = mysqli_query($link, $query);
 
 ?>
 
@@ -38,7 +32,7 @@ $rs = mysqli_query($mysqli, $query);
           <td> <font face="Arial">Status</font> </td> 
       </tr>';
 
-if ($result = $mysqli->query($query)) {
+if ($result = $link->query($query)) {
     while ($row = $rs->fetch_assoc()) {
         $date = $row["date"];
         $timeslot = $row["timeslot"];
@@ -60,7 +54,7 @@ if ($result = $mysqli->query($query)) {
     $result->free();
 } 
 // Close the database connection
-mysqli_close($mysqli);?> 
+mysqli_close($link);?> 
 
 </body>
 </html>
