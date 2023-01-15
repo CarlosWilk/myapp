@@ -9,7 +9,7 @@ $mysqli = new mysqli('localhost', 'root', 'root', 'garage');
 $bookingID = $_GET['id'];
 
 // Get all the vehicles licenses from booking table
-$sqlBookings = "SELECT id, name, phone, vehicle_license, vehicle_type FROM bookings where id=$bookingID";
+$sqlBookings = "SELECT id, name, phone, vehicle_license, type_name FROM bookings LEFT JOIN vehicle_type on bookings.vehicle_type = vehicle_type.type_id where id=$bookingID";
 
 $result = $mysqli->query($sqlBookings);
 
@@ -21,14 +21,10 @@ if ($result->num_rows > 0) {
 		$name = $booking_data['name'];
 		$phone = $booking_data['phone'];
 		$vehicle_license = $booking_data['vehicle_license'];
-		$vehicle_type = $booking_data['vehicle_type'];
+		$vehicle_type = $booking_data['type_name'];
 
 	}
 }
-
-//Get all the items from items table
-$sql1 = "SELECT id FROM bookings";
-$all_bookings = mysqli_query($mysqli, $sql1);
 
 //Get all the items from items table
 $sql2 = "SELECT name, price FROM itens";
@@ -79,20 +75,17 @@ the modifications include the selection of itens from the table and autocomplete
 						<input type="text" class="form-control" name="companyName" id="companyName" value="<?php echo $name ?>" autocomplete="off">
 					</div>
 					<div class="form-group">
+						<label>Phone: </label>
 						<input type="text" class="form-control" name="address" id="address" value="<?php echo $phone ?>"></textarea>
 					</div>
 					<div class="form-group">
 						<label>Booking ID <label>
-							<input type="text" name="booking_id" value="<?php echo $bookingID ?>">
-							
-					</div>
-
-					</div>
-				</div>
+							<input type="text" name="booking_id" id="booking_id" value="<?php echo $bookingID ?>">				
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="vehicleLicense" id="vehicleLicense"
-							placeholder="Vehicle Model" autocomplete="off">
+						<label>Vehicle model <label>
+							<input type="text" class="form-control" name="vehicleLicense" id="vehicleLicense"
+							value="<?php echo $vehicle_type?>" autocomplete="off">
 					</div>
 					<div>
 						<lable>Select a vehicle</label>
@@ -100,34 +93,32 @@ the modifications include the selection of itens from the table and autocomplete
 
 					</div>
 					<div class="form-group">
-					<label>Select a mechanic</label>
-					<select name="mechanic">
-							<?php
-							// use a while loop to fetch data
-							// from the $all_categories variable
-							// and individually display as an option
-							while (
-								$mechanics = mysqli_fetch_array(
-									$all_mechanics,
-									MYSQLI_ASSOC
-								)
-							):
-								;
-								?>
-								<option value="<?php echo $mechanics["mechanic_id"];
-								// The value we usually set is the primary key
-								?>">
-									<?php echo $mechanics["fullname"];
-									// To show the category name to the user
-									?>
-								</option>
+						<label>Select a mechanic</label>
+							<select name="mechanic">
 								<?php
-							endwhile;
-							// While loop must be terminated
-							?>
-						</select>
+								// use a while loop to fetch data
+								// from the $all_mechanics category and individually display as an option
+									while (
+										$mechanics = mysqli_fetch_array(
+											$all_mechanics,
+											MYSQLI_ASSOC
+											)
+										):
+											;
+								?>
+									<option value="<?php echo $mechanics["mechanic_id"];
+									// The value we usually set is the primary key
+									?>">
+										<?php echo $mechanics["fullname"];
+										// To show the category name to the user
+										?>
+									</option>
+								<?php
+									endwhile;
+									// While loop must be terminated
+								?>
+							</select>
 					</div>
-
 				</div>
 			</div>
 			<div class="row">
@@ -224,7 +215,7 @@ the modifications include the selection of itens from the table and autocomplete
 							<label>Service: &nbsp;</label>
 							<div class="input-group">
 								<div class="input-group-addon currency">€</div>
-								<input value="" type="number" class="form-control" name="feeService" id="feeService"
+								<input value="" type="number" class="form-control" name="feeService" id="service_fee"
 									placeholder="Service fee">
 							</div>
 						</div>
