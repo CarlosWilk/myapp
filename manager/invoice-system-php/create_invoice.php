@@ -215,7 +215,7 @@ the modifications include the selection of itens from the table and autocomplete
 							<label>Service: &nbsp;</label>
 							<div class="input-group">
 								<div class="input-group-addon currency">€</div>
-								<input value="" type="number" class="form-control" name="feeService" id="service_fee"
+								<input value="" type="number" class="form-control" name="service_fee" id="service_fee"
 									placeholder="Service fee">
 							</div>
 						</div>

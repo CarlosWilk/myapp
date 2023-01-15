@@ -51,7 +51,7 @@ class Invoice{
 	}		
 	public function saveInvoice($POST) {		
 		$sqlInsert = "
-			INSERT INTO ".$this->invoiceOrderTable."(user_id, booking_id, order_receiver_name, order_receiver_address, order_total_before_tax, order_total_tax, service_fee,order_tax_per, order_total_after_tax, order_amount_paid, order_total_amount_due, note) 
+			INSERT INTO ".$this->invoiceOrderTable."(user_id, booking_id, order_receiver_name, order_receiver_address, order_total_before_tax, order_total_tax, service_fee, order_tax_per, order_total_after_tax, order_amount_paid, order_total_amount_due, note) 
 			VALUES ('".$POST['userId']."', '".$POST['booking_id']."','".$POST['companyName']."', '".$POST['address']."', '".$POST['subTotal']."', '".$POST['taxAmount']."', '".$POST['service_fee']."','".$POST['taxRate']."', '".$POST['totalAftertax']."', '".$POST['amountPaid']."', '".$POST['amountDue']."', '".$POST['notes']."')";		
 		mysqli_query($this->dbConnect, $sqlInsert);
 		$lastInsertId = mysqli_insert_id($this->dbConnect);
