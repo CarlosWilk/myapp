@@ -1,5 +1,7 @@
 <?php
 
+//Page to edit the booking's status
+
 //Include connection to the database
 require_once("/xampp/htdocs/myapp/customer/conf.php");
 
@@ -52,24 +54,18 @@ where bookings.id = $bookingID");
             $booking_data['status'] = $status;
         }
 
-
     } else {
 
-        header('Location: editbook.php');
+        header('Location: view_book.php');
     }
-
 }
-
-
-
-
 ?>
 
 <html>
 
 <body class="blue lighten-3">
     <
-    <a href="editbook.php" class="btn btn-primary"> Return </a>
+    <a href="view_book.php" class="btn btn-primary"> Return </a>
 
     <div class="box">
         <form action="saveEdit.php" method="POST">

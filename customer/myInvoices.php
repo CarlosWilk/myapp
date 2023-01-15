@@ -6,13 +6,27 @@ session_start();
 //Display the menu
 require("/xampp/htdocs/myapp/templates/menu.php");
 
+//Connecttion to the database
+require_once("/xampp/htdocs/myapp/customer/conf.php");
+
 //Store the name of the user logged in
 $username = $_SESSION['username'];
 
-require_once("/xampp/htdocs/myapp/customer/conf.php");
+//Get the user id in order to retrieve information from the database
+$userID = $_SESSION['id'];
 
-//SQL query
-$query = ("SELECT * FROM invoice_order where order_receiver_name = '$username'");
+//Get the customer fullname from the database
+$sql = "SELECT fullname FROM users WHERE id = '$userID'";
+$allcustomer = mysqli_query($link,$sql);
+
+//array to store the information about the customer
+$userInfo = mysqli_fetch_array(
+    $allcustomer,
+    MYSQLI_ASSOC
+);
+
+//SQL query to bring all the invoices where the current customer appears
+$query = ("SELECT * FROM invoice_order LEFT JOIN bookings on invoice_order.booking_id = bookings.id where order_receiver_name = '$userInfo[fullname]'");
 
 
 // Execute the query (the recordset $rs contains the result)

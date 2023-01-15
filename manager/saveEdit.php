@@ -1,5 +1,7 @@
 <?php
 
+//Code to update the new status into the database
+
 require('/xampp/htdocs/myapp/customer/conf.php');
 
 if(isset($_POST['update']))
@@ -17,4 +19,4 @@ if(isset($_POST['update']))
     
 }
 
-header('Location: editbook.php');
+header('Location: view_book.php');

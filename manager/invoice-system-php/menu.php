@@ -5,7 +5,7 @@
 	<ul class="dropdown-menu">
 		<li><a href="invoice_list.php">Invoice List</a></li>
 		<!--<li><a href="create_invoice.php">Create Invoice</a></li>-->	
-		<li><a href="/myapp/manager/editbook.php"> Check bookings</a></li>			  
+		<li><a href="/myapp/manager/view_book.php"> Check bookings</a></li>			  
 	</ul>
 </li>
 <?php 

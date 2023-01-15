@@ -85,6 +85,7 @@ if (isset($_POST['submit'])) {
 
 }
 
+//Configuration of the timeslot
 $duration = 120;
 $cleanup = 0;
 $start = "09:00";

@@ -36,7 +36,7 @@ h4 {
 <a href="/customer/welcome.php" class="brand-logo brand-text">Ger's Garage</a>
 <ul id="nav-mobile" class="right hide-on-small-and-down">
 
-<li><a href="dashboard.php" class="btn brand z-depth-0"> Bookings</a></li>
+<li><a href="view_book.php" class="btn brand z-depth-0"> Bookings</a></li>
 <li><a href="./invoice-system-php/invoice_list.php" class="btn brand z-depth-0"> Invoices</a></li>
 <li><a href="#" class="btn brand z-depth-0"> Logout</a></li>
 

@@ -14,7 +14,7 @@ session_start();
 require_once("/xampp/htdocs/myapp/customer/conf.php");
 
 
-//By default will be displayed all the bookings
+//By default will be displayed all the bookings. Status 4 = collected.
 $query = ("SELECT bookings.id, name, phone, date, timeslot, booking_type.booking_name, comments, booking_status.status_desc FROM bookings LEFT JOIN booking_status ON bookings.status = booking_status.status_id LEFT JOIN booking_type on bookings.booking_type = booking_type.id where status <> 4");
 
 if (isset($_POST['all'])) {
@@ -75,7 +75,7 @@ if (isset($_POST['week'])) {
             echo "<td>" . $booking_data['comments'] . "</td>";
             echo "<td>" . $booking_data['status_desc'] . "</td>";
             echo"<td> 
-                    <a class='btn btn-sm btn-primary' href='testbook.php?id=$booking_data[id]'>
+                    <a class='btn btn-sm btn-primary' href='edit_book.php?id=$booking_data[id]'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                             <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                         </svg>
